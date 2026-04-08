@@ -310,7 +310,7 @@ main {
   padding: 1.1rem;
   border-radius: 2rem;
   z-index: 1;
-  max-width: 560px;
+  max-width: 680px;
   justify-self: end;
 }
 
@@ -333,13 +333,12 @@ main {
 
 .showcase-stack {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
 .showcase-stack img {
   width: 100%;
-  max-height: 300px;
+  max-height: 420px;
   object-fit: cover;
   border-radius: 1.35rem;
   border: 1px solid rgba(255,255,255,0.08);
@@ -544,7 +543,7 @@ main {
   border-radius: 2rem;
   position: relative;
   overflow: hidden;
-  min-height: 22rem;
+  min-height: 26rem;
 }
 
 .spec-hero img {
@@ -598,8 +597,8 @@ main {
 }
 
 .shot-card img {
-  width: min(170px, 100%);
-  max-height: 320px;
+  width: min(240px, 100%);
+  max-height: 380px;
   object-fit: cover;
   object-position: top;
   border-radius: 1rem;
