@@ -1,5 +1,8 @@
 const reveals = document.querySelectorAll('.reveal');
 const faqButtons = document.querySelectorAll('[data-faq]');
+const mobileMenu = document.querySelector('.mobile-menu');
+const mobileMenuSummary = mobileMenu?.querySelector('summary');
+const mobileMenuLinks = mobileMenu?.querySelectorAll('a') ?? [];
 
 const observer = new IntersectionObserver(
   (entries) => {
@@ -16,6 +19,26 @@ const observer = new IntersectionObserver(
 );
 
 reveals.forEach((el) => observer.observe(el));
+
+if (mobileMenu && mobileMenuSummary) {
+  mobileMenuSummary.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isOpen = mobileMenu.hasAttribute('open');
+    mobileMenu.toggleAttribute('open', !isOpen);
+  });
+
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.removeAttribute('open');
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!mobileMenu.contains(event.target)) {
+      mobileMenu.removeAttribute('open');
+    }
+  });
+}
 
 faqButtons.forEach((button) => {
   button.addEventListener('click', () => {

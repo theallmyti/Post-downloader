@@ -943,7 +943,7 @@ main {
     position: absolute;
     top: calc(100% + 0.55rem);
     right: 0;
-    display: grid;
+    display: none;
     gap: 0.35rem;
     min-width: 11rem;
     padding: 0.65rem;
