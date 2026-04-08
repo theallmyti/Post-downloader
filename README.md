@@ -16,7 +16,7 @@ VaultDrop is an Android app built in Kotlin + Jetpack Compose for saving and man
 
 ### Download Link
 
-- [Download Latest APK](YOUR_APK_DOWNLOAD_LINK_HERE)
+- [Download Latest APK](https://github.com/theallmyti/Post-downloader/releases/download/app/VaultDrop-arm64-v8a-debug-1.0.0.apk)
 
 Replace `YOUR_APK_DOWNLOAD_LINK_HERE` with your release APK or GitHub Releases URL.
 
