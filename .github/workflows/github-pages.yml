@@ -27,6 +27,7 @@ jobs:
           cp website/index.html dist/index.html
           cp website/styles.css dist/styles.css
           cp website/app.js dist/app.js
+          cp Logo.png dist/Logo.png
           cp UI-screenshots/*.png dist/UI-screenshots/
           touch dist/.nojekyll
 

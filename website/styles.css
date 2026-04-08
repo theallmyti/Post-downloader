@@ -136,6 +136,14 @@ img {
   box-shadow: 0 12px 30px rgba(200, 240, 75, 0.2);
 }
 
+.brand-logo {
+  width: 2.65rem;
+  height: 2.65rem;
+  object-fit: cover;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(200, 240, 75, 0.2);
+}
+
 .brand strong {
   display: block;
   font-family: var(--font-heading);
