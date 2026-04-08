@@ -1,0 +1,39 @@
+name: Deploy VaultDrop Website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'website/**'
+      - 'UI-screenshots/**'
+      - '.github/workflows/github-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare site directory
+        run: |
+          rm -rf dist
+          mkdir -p dist/UI-screenshots
+          cp website/index.html dist/index.html
+          cp website/styles.css dist/styles.css
+          cp website/app.js dist/app.js
+          cp UI-screenshots/*.png dist/UI-screenshots/
+          touch dist/.nojekyll
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
