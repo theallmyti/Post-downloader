@@ -844,14 +844,21 @@ main {
   .timeline-item,
   .timeline-item.reverse {
     grid-template-columns: 1rem 1fr;
+    align-items: start;
   }
 
   .timeline-node,
-  .timeline-card,
-  .timeline-item.reverse .timeline-card,
   .timeline-item.reverse .timeline-node {
     grid-column: auto;
     justify-self: start;
+  }
+
+  .timeline-card,
+  .timeline-item.reverse .timeline-card {
+    grid-column: auto;
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
   }
 
   .timeline-node {
