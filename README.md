@@ -1,0 +1,144 @@
+# VaultDrop (Post-downloader)
+
+VaultDrop is an Android app built in Kotlin + Jetpack Compose for saving and managing media links from Instagram and YouTube, with built-in downloading, bookmarking, and preview workflows.
+
+## Overview
+
+VaultDrop focuses on a clean mobile-first workflow:
+- Share an Instagram/YouTube link to VaultDrop
+- Choose Download or Save Link
+- Track progress in Downloads
+- View media in Library
+- Manage saved links in Bookmarks (Vault)
+
+The app includes:
+- Download queue and progress tracking
+- Bookmarks with thumbnail previews
+- In-app preview flow for saved links
+- Taggable notes for bookmarks
+- Settings actions to repair links/thumbnails and clear data
+
+## Core Features
+
+- Share-receiver flow (`ACTION_SEND`) for links
+- Platform detection (Instagram, YouTube)
+- Download management with status + progress
+- Library and player viewers
+- Bookmarks grid with search and quick actions
+- Long-press context actions (preview/browser/copy/refresh/delete)
+- URL normalization for Instagram share URLs (`igsh` cleanup)
+- Thumbnail backfill and refresh logic for old bookmarks
+- Settings-managed quick tags for bookmark notes
+- Optional Instagram session login in-app for authenticated extraction
+
+## Tech Stack
+
+- Kotlin
+- Jetpack Compose
+- MVVM + Repository pattern
+- Room (local persistence)
+- Hilt (DI)
+- Media3 / ExoPlayer
+- Coil (image loading)
+- Foreground service for downloads
+
+## App Structure
+
+```text
+app/src/main/java/com/adityaprasad/vaultdrop/
+  data/
+    db/
+    downloader/
+    repository/
+  domain/
+    model/
+    usecase/
+  ui/
+    home/
+    downloads/
+    library/
+    bookmarks/
+    player/
+    share/
+    settings/
+```
+
+## Flowchart
+
+```mermaid
+flowchart TD
+    A[User shares URL from Instagram/YouTube] --> B[ShareReceiverActivity]
+    B --> C{Action selected}
+
+    C -->|Download| D[Create DownloadItem]
+    D --> E[DownloadService + Downloader]
+    E --> F[Downloads Screen Progress]
+    F --> G[Library Screen]
+    G --> H[In-app Player]
+
+    C -->|Save Link| I[Normalize URL + detect platform]
+    I --> J[Fetch metadata + thumbnail]
+    J --> K[Create BookmarkItem]
+    K --> L[Bookmarks Grid]
+
+    L --> M{Long press action}
+    M -->|Preview in app| N[BookmarkPreviewActivity]
+    M -->|Open in browser| O[External Browser]
+    M -->|Copy link| P[Clipboard]
+    M -->|Refresh preview| Q[Re-extract thumbnail]
+    M -->|Delete| R[Delete bookmark]
+
+    S[Settings] --> T[Repair Instagram Links & Thumbnails]
+    T --> U[Normalize saved URLs + refresh thumbs]
+
+    S --> V[Instagram Session Login]
+    V --> W[Save cookie/session]
+    W --> X[Use authenticated extraction path]
+```
+
+## UI Screenshots
+
+### Home
+![Home](UI-screenshots/HomePage.png)
+
+### Downloads
+![Downloads](UI-screenshots/DownloadPage.png)
+
+### Library
+![Library](UI-screenshots/LibraryPage.png)
+
+### Bookmarks
+![Bookmarks](UI-screenshots/BookmarkPage.png)
+
+### Settings (1)
+![Settings 1](UI-screenshots/SettingPage1.png)
+
+### Settings (2)
+![Settings 2](UI-screenshots/SettingPage2.png)
+
+## Setup
+
+1. Clone the repository.
+2. Open in Android Studio / VS Code with Android tooling.
+3. Ensure Android SDK and Gradle are configured.
+4. Build and run on API 26+ device/emulator.
+
+```bash
+./gradlew assembleDebug
+```
+
+Windows:
+
+```bat
+gradlew.bat assembleDebug
+```
+
+## Notes
+
+- Instagram extraction behavior can vary by region/session/privacy.
+- For some links, authenticated session improves media/thumbnail extraction.
+- Settings includes maintenance actions for URL repair and thumbnail refresh.
+
+---
+
+Aditya Prasad
